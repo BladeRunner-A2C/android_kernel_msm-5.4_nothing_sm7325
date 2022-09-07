@@ -45,14 +45,11 @@ if test -z "$(git rev-parse --show-cdup 2>/dev/null)" &&
         ZIPNAME="${ZIPNAME::-4}-$(echo $head | cut -c1-8).zip"
 fi
 CLANG_DIR="$TC_DIR/clang-r416183b1"
-GCC_64_DIR="$TC_DIR/aarch64-linux-android-4.9"
-GCC_32_DIR="$TC_DIR/arm-linux-androideabi-4.9"
 AK3_DIR="$HOME/AnyKernel3"
 DEFCONFIG="spacewar_defconfig"
 
-MAKE_PARAMS="O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- LLVM=1 \
-	CROSS_COMPILE=$GCC_64_DIR/bin/aarch64-linux-android- \
-	CROSS_COMPILE_ARM32=$GCC_32_DIR/bin/arm-linux-androideabi-"
+MAKE_PARAMS="O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1 \
+	CROSS_COMPILE=$TC_DIR/bin/llvm-"
 
 export PATH="$CLANG_DIR/bin:$PATH"
 
